@@ -18,14 +18,14 @@ end
 def show_recent_commit_msgs
   msgs = `git log --pretty=format:'%s'`.split("\n")
 
-  if msgs.size <= 1
-    puts "commit count less than 1"
-    exit 1
+  if msgs.size >= 3
+    top_three = msgs.first(3)
+    top_three.each do |msg|
+      file_prepend($commit_msg_file, msg)
+    end
   end
 
-  msgs.each do |msg|
-    file_prepend($commit_msg_file, msg)
-  end
+  exit 0
 end
 
 show_recent_commit_msgs
