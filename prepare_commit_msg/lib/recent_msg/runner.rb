@@ -15,7 +15,9 @@ module RecentMsg
     end
 
     def run
-      show_recent_commit_msgs(3, `git log --pretty=format:'%s'`.split("\n"))
+      if @options.commit_source != 'message'
+        show_recent_commit_msgs(3, `git log --pretty=format:'%s'`.split("\n"))
+      end
     end
   end
 end
