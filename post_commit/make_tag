@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+#fetch commit msg of last commit
+log_header=`git log -n 1 | head -n 5 | tail -n 1 | sed -e 's/^ *//'`
+branch=`git branch | grep '^\*' | sed -e 's/^* *//' | sed -e 's/\(object\).*/\1/'`.chomp
+#puts "commit\'s log header is #{log_header}"
+puts "current branch is >#{branch}<"
+
+#if commit msg's header starts with current branch name,
+#make tag of the form <branch_name:sequence>
+if log_header =~ /^#{branch}.\d : .*$/
+  tag_name=`echo "#{log_header}" | sed -e 's/ : .*$//'`
+  puts "this commit should be tagged with #{tag_name}"
+end
+
