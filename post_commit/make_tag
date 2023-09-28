@@ -10,6 +10,5 @@ puts "current branch is >#{branch}<"
 #make tag of the form <branch_name:sequence>
 if log_header =~ /^#{branch}.\d : .*$/
   tag_name=`echo "#{log_header}" | sed -e 's/ : .*$//'`
-  puts "this commit should be tagged with #{tag_name}"
+  `git tag #{tag_name}`
 end
-
