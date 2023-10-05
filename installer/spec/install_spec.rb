@@ -1,4 +1,4 @@
-require_relative './install'
+require_relative '../install'
 
 describe "Installer", "operations" do
 
