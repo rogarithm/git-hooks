@@ -26,4 +26,9 @@ class Installer
       File.delete(where_installed)
     end
   end
+
+  def install_hook_to_targets(trigger_point, targets)
+    targets.each do |target|
+    end
+  end
 end

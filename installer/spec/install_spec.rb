@@ -24,4 +24,6 @@ describe "Installer", "operations" do
     @installer.install_hook(@trigger_point, @install_root)
     File.symlink?(@where_to_install).should == true
   end
+  it "한 번에 두 곳에 훅을 설치할 수 있다" do
+  end
 end
