@@ -35,4 +35,7 @@ describe "Installer", "operations" do
     File.symlink?(@where_to_install).should == true
     File.symlink?(@where_to_install2).should == true
   end
+
+  it "훅을 설치할 경로 정보를 파일에서 읽어올 수 있다" do
+  end
 end
