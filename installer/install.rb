@@ -10,34 +10,36 @@ class Installer
     "#{right_upper}/#{file}"
   end
 
-  def find_install_location(where, trigger_point)
+  def find_install_location(trigger_point, where)
     File.join(File.expand_path(where), '.git/hooks', trigger_point)
   end
 
-  def install_hook(trigger_point, target)
-    if (File.symlink?(target) == false)
-      File.symlink(find_hook_location(trigger_point), find_install_location(target, trigger_point))
+  def install_hook(trigger_point, *targets)
+    targets.each do |target|
+      if (File.symlink?(target) == false)
+        File.symlink(
+          find_hook_location(trigger_point),
+          find_install_location(trigger_point, target)
+        )
+      end
     end
   end
 
-  def uninstall_hook(where, trigger_point)
-    where_installed=find_install_location(where, trigger_point)
-    if (File.symlink?(where_installed))
-      File.delete(where_installed)
+  def uninstall_hook(trigger_point, *wheres)
+    wheres.each do |where|
+      where_installed=find_install_location(trigger_point, where)
+      if (File.symlink?(where_installed))
+        File.delete(where_installed)
+      end
     end
   end
 
   def find_install_locations(trigger_point, *wheres)
     locations = []
     wheres.each do |where|
-      locations.push(File.join(File.expand_path(where), '.git/hooks', trigger_point))
+      locations.push(File.join(
+        File.expand_path(where), '.git/hooks', trigger_point))
     end
     locations
-  end
-
-  def install_hook_to_targets(trigger_point, *targets)
-    targets.each do |target|
-      install_hook(trigger_point, target)
-    end
   end
 end
