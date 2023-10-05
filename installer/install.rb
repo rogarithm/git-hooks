@@ -27,8 +27,17 @@ class Installer
     end
   end
 
-  def install_hook_to_targets(trigger_point, targets)
+  def find_install_locations(trigger_point, *wheres)
+    locations = []
+    wheres.each do |where|
+      locations.push(File.join(File.expand_path(where), '.git/hooks', trigger_point))
+    end
+    locations
+  end
+
+  def install_hook_to_targets(trigger_point, *targets)
     targets.each do |target|
+      install_hook(trigger_point, target)
     end
   end
 end
