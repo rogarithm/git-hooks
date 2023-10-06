@@ -9,6 +9,7 @@ describe "Installer", "operations" do
     @install_root='/tmp/test_install_git_hook'
     @install_root2='/tmp/test_install_git_hook2'
     @install_list_path='./install_list'
+    @install_list=[@install_root, @install_root2]
     @where_to_install='/tmp/test_install_git_hook/.git/hooks/pre-push'
     @where_to_install2='/tmp/test_install_git_hook2/.git/hooks/pre-push'
   end
@@ -29,7 +30,7 @@ describe "Installer", "operations" do
   end
 
   it "훅을 설치할 여러 저장소 경로와 발동 조건으로 저장소별 훅 설치 위치를 계산할 수 있다" do
-    @installer.find_install_locations(@trigger_point, @install_root, @install_root2).should == [File.expand_path(@where_to_install), File.expand_path(@where_to_install2)]
+    @installer.find_install_locations(@trigger_point, @install_list).should == [File.expand_path(@where_to_install), File.expand_path(@where_to_install2)]
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @installer.install_hook(@trigger_point, @install_root, @install_root2)

@@ -45,7 +45,7 @@ class Installer
     end
   end
 
-  def find_install_locations(trigger_point, *wheres)
+  def find_install_locations(trigger_point, wheres)
     locations = []
     wheres.each do |where|
       locations.push(File.join(
