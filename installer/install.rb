@@ -1,7 +1,18 @@
 class Installer
 
-  def initialize()
+  def initialize(install_list_path='./install_list')
+    @install_list = install_list_path
     @source_root = '~/tools/git-hooks/'
+  end
+
+  def prepare_paths_to_install
+    wheres = []
+    File.open(@install_list, "r") do |f|
+      f.each_line do |line|
+        wheres.push(line.gsub(/\n/, ''))
+      end
+    end
+    wheres
   end
 
   def find_hook_location(trigger_point)
