@@ -25,12 +25,15 @@ class Installer
     File.join(File.expand_path(where), '.git/hooks', trigger_point)
   end
 
-  def install_hook(trigger_point, *targets)
-    targets.each do |target|
-      if (File.symlink?(target) == false)
+  def install_hook(trigger_point, expanded_targets)
+    if (expanded_targets.is_a?(Array) == false)
+      expanded_targets = [expanded_targets]
+    end
+    expanded_targets.each do |expanded_target|
+      if (File.symlink?(expanded_target) == false)
         File.symlink(
           find_hook_location(trigger_point),
-          find_install_location(trigger_point, target)
+          expanded_target
         )
       end
     end

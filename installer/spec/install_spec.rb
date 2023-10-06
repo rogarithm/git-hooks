@@ -25,7 +25,7 @@ describe "Installer", "operations" do
     @installer.find_hook_location(@trigger_point).should == File.expand_path(@source_full_path)
   end
   it "훅을 설치할 위치와 발동 조건을 입력하면 훅을 설치한다" do
-    @installer.install_hook(@trigger_point, @install_root)
+    @installer.install_hook(@trigger_point, @installer.find_install_location(@trigger_point, @install_root))
     File.symlink?(@where_to_install).should == true
   end
 
@@ -33,7 +33,7 @@ describe "Installer", "operations" do
     @installer.find_install_locations(@trigger_point, @install_list).should == [File.expand_path(@where_to_install), File.expand_path(@where_to_install2)]
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
-    @installer.install_hook(@trigger_point, @install_root, @install_root2)
+    @installer.install_hook(@trigger_point, [@installer.find_install_location(@trigger_point, @install_root), @installer.find_install_location(@trigger_point, @install_root2)])
     File.symlink?(@where_to_install).should == true
     File.symlink?(@where_to_install2).should == true
   end
