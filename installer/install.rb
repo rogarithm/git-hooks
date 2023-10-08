@@ -56,4 +56,6 @@ class Installer
     end
     locations
   end
+
+  private :find_install_location
 end
