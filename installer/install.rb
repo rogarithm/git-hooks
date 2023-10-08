@@ -1,13 +1,12 @@
 class Installer
 
-  def initialize(install_path_list='./install_list')
-    @install_path_list = install_path_list
+  def initialize
     @source_root = '~/tools/git-hooks/'
   end
 
-  def prepare_paths_to_install
+  def prepare_paths_to_install(install_path_list='./install_list')
     wheres = []
-    File.open(@install_path_list, "r") do |f|
+    File.open(install_path_list, "r") do |f|
       f.each_line do |line|
         wheres.push(line.gsub(/\n/, ''))
       end
