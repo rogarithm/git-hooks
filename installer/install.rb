@@ -16,13 +16,13 @@ class Installer
   end
 
   def find_hook_location(trigger_point)
-    right_upper=File.join(
+    hook_dir=File.join(
       File.expand_path(@source_root),
       trigger_point.sub(/-/, '_'),
       'bin'
     )
-    file=`ls #{right_upper}`.sub(/\n/, '')
-    "#{right_upper}/#{file}"
+    hook_file=`ls #{hook_dir}`.sub(/\n/, '')
+    "#{hook_dir}/#{hook_file}"
   end
 
   def find_install_locations(trigger_point, wheres)
