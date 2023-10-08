@@ -55,11 +55,10 @@ class Installer
     end
   end
 
-  def uninstall_hook(trigger_point, *wheres)
+  def uninstall_hook(trigger_point, wheres)
     wheres.each do |where|
-      where_installed=find_install_location(trigger_point, where)
-      if (File.symlink?(where_installed))
-        File.delete(where_installed)
+      if (File.symlink?(where))
+        File.delete(where)
       end
     end
   end

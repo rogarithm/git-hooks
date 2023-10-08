@@ -14,8 +14,10 @@ describe "Installer", "operations" do
   after(:each) do
     @installer.uninstall_hook(
       @trigger_point,
-      @install_root_dir,
-      @install_root_dir2
+      @installer.find_install_locations(
+        @trigger_point,
+        @installer.prepare_paths_to_install('./install_list')
+      )
     )
   end
 
