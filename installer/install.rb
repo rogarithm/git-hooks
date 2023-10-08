@@ -16,7 +16,11 @@ class Installer
   end
 
   def find_hook_location(trigger_point)
-    right_upper=File.join(File.expand_path(@source_root), trigger_point.sub(/-/, '_'), 'bin')
+    right_upper=File.join(
+      File.expand_path(@source_root),
+      trigger_point.sub(/-/, '_'),
+      'bin'
+    )
     file=`ls #{right_upper}`.sub(/\n/, '')
     "#{right_upper}/#{file}"
   end
@@ -25,13 +29,20 @@ class Installer
     locations = []
     wheres.each do |where|
       locations.push(File.join(
-        File.expand_path(where), '.git/hooks', trigger_point))
+          File.expand_path(where),
+          '.git/hooks',
+          trigger_point
+        ))
     end
     locations
   end
 
   def find_install_location(trigger_point, where)
-    File.join(File.expand_path(where), '.git/hooks', trigger_point)
+    File.join(
+      File.expand_path(where),
+      '.git/hooks',
+      trigger_point
+    )
   end
 
   def install_hook(trigger_point, expanded_targets)
