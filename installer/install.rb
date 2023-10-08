@@ -35,9 +35,6 @@ class Installer
   end
 
   def install_hook(trigger_point, expanded_targets)
-    if (expanded_targets.is_a?(Array) == false)
-      expanded_targets = [expanded_targets]
-    end
     expanded_targets.each do |expanded_target|
       if (File.symlink?(expanded_target) == false)
         File.symlink(
