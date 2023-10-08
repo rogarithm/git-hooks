@@ -21,6 +21,15 @@ class Installer
     "#{right_upper}/#{file}"
   end
 
+  def find_install_locations(trigger_point, wheres)
+    locations = []
+    wheres.each do |where|
+      locations.push(File.join(
+        File.expand_path(where), '.git/hooks', trigger_point))
+    end
+    locations
+  end
+
   def find_install_location(trigger_point, where)
     File.join(File.expand_path(where), '.git/hooks', trigger_point)
   end
@@ -46,15 +55,6 @@ class Installer
         File.delete(where_installed)
       end
     end
-  end
-
-  def find_install_locations(trigger_point, wheres)
-    locations = []
-    wheres.each do |where|
-      locations.push(File.join(
-        File.expand_path(where), '.git/hooks', trigger_point))
-    end
-    locations
   end
 
   private :find_install_location
