@@ -24,7 +24,7 @@ class Installer
     "#{hook_dir}/#{hook_file}"
   end
 
-  def find_install_locations(trigger_point, wheres)
+  def find_target_locations(trigger_point, wheres)
     locations = []
     wheres.each do |where|
       locations.push(File.join(
@@ -36,7 +36,7 @@ class Installer
     locations
   end
 
-  def find_install_location(trigger_point, where)
+  def find_target_location(trigger_point, where)
     File.join(
       File.expand_path(where),
       '.git/hooks',
@@ -63,5 +63,5 @@ class Installer
     end
   end
 
-  private :find_install_location
+  private :find_target_location
 end

@@ -14,7 +14,7 @@ describe "Installer", "operations" do
   after(:each) do
     @installer.uninstall_hook(
       @trigger_point,
-      @installer.find_install_locations(
+      @installer.find_target_locations(
         @trigger_point,
         @installer.prepare_paths_to_install('./install_list')
       )
@@ -22,7 +22,7 @@ describe "Installer", "operations" do
   end
 
   it "훅을 설치할 저장소 경로와 발동 조건으로 훅 설치 위치를 계산할 수 있다" do
-    @installer.find_install_locations(
+    @installer.find_target_locations(
       @trigger_point,
       @installer.prepare_paths_to_install('./install_list2')
     ).should == [File.expand_path(@install_full_dir)]
@@ -35,7 +35,7 @@ describe "Installer", "operations" do
   it "훅을 설치할 위치와 발동 조건을 입력하면 훅을 설치한다" do
     @installer.install_hook(
       @trigger_point,
-      @installer.find_install_locations(
+      @installer.find_target_locations(
         @trigger_point,
         @installer.prepare_paths_to_install('./install_list2')
       )
@@ -44,7 +44,7 @@ describe "Installer", "operations" do
   end
 
   it "훅을 설치할 여러 저장소 경로와 발동 조건으로 저장소별 훅 설치 위치를 계산할 수 있다" do
-    @installer.find_install_locations(
+    @installer.find_target_locations(
       @trigger_point,
       @installer.prepare_paths_to_install()
     ).should == [File.expand_path(@install_full_dir), File.expand_path(@install_full_dir2)]
@@ -52,7 +52,7 @@ describe "Installer", "operations" do
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @installer.install_hook(
       @trigger_point,
-      @installer.find_install_locations(
+      @installer.find_target_locations(
         @trigger_point,
         @installer.prepare_paths_to_install()
       )
