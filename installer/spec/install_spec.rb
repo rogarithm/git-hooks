@@ -11,7 +11,7 @@ describe "Installer", "operations" do
 
   after(:each) do
     @installer.uninstall_hook(
-      @installer.find_target_locations(
+      @installer.make_install_infos(
         @installer.prepare_paths_to_install('./spec/data/install_list')
       )
     )

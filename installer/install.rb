@@ -70,8 +70,9 @@ class Installer
     end
   end
 
-  def uninstall_hook(expanded_targets)
-    expanded_targets.each do |expanded_target|
+  def uninstall_hook(uninstall_infos)
+    uninstall_infos.each do |uninstall_info|
+      expanded_target = uninstall_info[0]
       if (File.symlink?(expanded_target))
         File.delete(expanded_target)
       end
