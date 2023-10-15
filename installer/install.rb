@@ -26,16 +26,6 @@ class Installer
     "#{hook_dir}/#{hook_file}"
   end
 
-  def find_target_locations(target_infos)
-    locations = []
-    target_infos.each do |target_info|
-      where = target_info[0]
-      trigger_point = target_info[1]
-      locations.push(find_target_location(where, trigger_point))
-    end
-    locations
-  end
-
   def make_install_infos(target_infos)
     install_infos = []
     target_infos.each do |target_info|

@@ -17,10 +17,10 @@ describe "Installer", "operations" do
     )
   end
 
-  it "훅을 설치할 저장소 경로와 발동 조건으로 훅 설치 위치를 계산할 수 있다" do
-    @installer.find_target_locations(
+  it "설정 파일 내용으로부터 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
+    @installer.make_install_infos(
       @installer.prepare_paths_to_install('./spec/data/install_list2')
-    ).should == [File.expand_path(@install_full_dir)]
+    ).should == [[File.expand_path(@install_full_dir), @trigger_point]]
   end
   it "훅 발동 조건으로 훅 소스 위치를 계산할 수 있다" do
     @installer.find_hook_location(
@@ -36,10 +36,14 @@ describe "Installer", "operations" do
     File.symlink?(@install_full_dir).should == true
   end
 
-  it "훅을 설치할 여러 저장소 경로와 발동 조건으로 저장소별 훅 설치 위치를 계산할 수 있다" do
-    @installer.find_target_locations(
+  it "설정 파일 내용으로부터 여러 개의 훅을 설치하는 데 필요한 정보를 계산할 수 있다" do
+    @installer.make_install_infos(
       @installer.prepare_paths_to_install('./spec/data/install_list')
-    ).should == [File.expand_path(@install_full_dir), File.expand_path(@install_full_dir2)]
+    ).should ==
+    [
+      [File.expand_path(@install_full_dir), @trigger_point],
+      [File.expand_path(@install_full_dir2), @trigger_point]
+    ]
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @installer.install_hook(
