@@ -29,14 +29,14 @@ class Installer
   def find_target_locations(target_infos)
     locations = []
     target_infos.each do |target_info|
-      trigger_point = target_info[1]
       where = target_info[0]
-      locations.push(find_target_location(trigger_point, where))
+      trigger_point = target_info[1]
+      locations.push(find_target_location(where, trigger_point))
     end
     locations
   end
 
-  def find_target_location(trigger_point, where)
+  def find_target_location(where, trigger_point)
     File.join(
       File.expand_path(where),
       '.git/hooks',
