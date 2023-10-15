@@ -37,7 +37,7 @@ class Installer
   def find_target_locations(trigger_point, wheres)
     locations = []
     wheres.each do |where|
-      locations.push(find_target_location(trigger_point, where))
+      locations.push(find_target_location(where[1], where[0]))
     end
     locations
   end
