@@ -13,7 +13,6 @@ describe "Installer", "operations" do
 
   after(:each) do
     @installer.uninstall_hook(
-      @trigger_point,
       @installer.find_target_locations(
         @trigger_point,
         @installer.prepare_paths_to_install('./spec/data/install_list')
