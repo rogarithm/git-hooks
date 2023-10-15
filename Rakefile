@@ -8,6 +8,7 @@ task :install do
       installer.prepare_paths_to_install('./installer/install_list')
     )
   )
+  installer.check_hooks_installed('./installer/install_list')
 end
 
 task :uninstall do
@@ -18,4 +19,5 @@ task :uninstall do
       installer.prepare_paths_to_install('./installer/install_list')
     )
   )
+  installer.check_hooks_installed('./installer/install_list')
 end

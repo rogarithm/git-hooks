@@ -58,4 +58,8 @@ describe "Installer", "operations" do
   it "훅을 설치할 경로와 발동 조건 정보를 파일에서 읽어올 수 있다" do
     @installer.prepare_paths_to_install('./spec/data/install_list').should == [['/tmp/test_install_git_hook', @trigger_point], ['/tmp/test_install_git_hook2', @trigger_point]]
   end
+
+  it "훅이 설치되었는지 확인할 수 있다" do
+    @installer.check_hooks_installed('./spec/data/install_list')
+  end
 end

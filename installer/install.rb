@@ -69,5 +69,21 @@ class Installer
     end
   end
 
+  def check_hooks_installed(install_path_list)
+    install_infos = make_install_infos(
+      prepare_paths_to_install(install_path_list)
+    )
+    install_infos.each do |install_info|
+      expanded_target = install_info[0]
+      trigger_point = install_info[1]
+      if (File.symlink?(expanded_target))
+        puts "#{trigger_point} hook installed on #{expanded_target}"
+        puts `ls -al #{expanded_target}`
+      else
+        puts "#{trigger_point} hook not installed on #{expanded_target}"
+      end
+    end
+  end
+
   private :find_target_location
 end
