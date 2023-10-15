@@ -29,8 +29,7 @@ describe "Installer", "operations" do
   end
   it "훅을 설치할 위치와 발동 조건을 입력하면 훅을 설치한다" do
     @installer.install_hook(
-      @trigger_point,
-      @installer.find_target_locations(
+      @installer.make_install_infos(
         @installer.prepare_paths_to_install('./spec/data/install_list2')
       )
     )
@@ -44,8 +43,7 @@ describe "Installer", "operations" do
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
     @installer.install_hook(
-      @trigger_point,
-      @installer.find_target_locations(
+      @installer.make_install_infos(
         @installer.prepare_paths_to_install('./spec/data/install_list')
       )
     )
