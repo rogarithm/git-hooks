@@ -55,7 +55,7 @@ describe "Installer", "operations" do
     File.symlink?(@install_full_dir2).should == true
   end
 
-  it "훅을 설치할 경로 정보를 파일에서 읽어올 수 있다" do
+  it "훅을 설치할 경로와 발동 조건 정보를 파일에서 읽어올 수 있다" do
     @installer.prepare_paths_to_install('./spec/data/install_list').should == [[@install_root_dir, @trigger_point], [@install_root_dir2, @trigger_point]]
   end
 end
