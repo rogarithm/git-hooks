@@ -16,14 +16,6 @@ class Installer
     wheres
   end
 
-  def store_only_first_items(infos)
-    result = []
-    infos.each do |info|
-      result.push(info[0])
-    end
-    result
-  end
-
   def find_hook_location(trigger_point)
     hook_dir=File.join(
       File.expand_path(@source_root),
