@@ -26,7 +26,7 @@ class Installer
     "#{hook_dir}/#{hook_file}"
   end
 
-  def find_target_locations(trigger_point, wheres)
+  def find_target_locations(wheres)
     locations = []
     wheres.each do |where|
       locations.push(find_target_location(where[1], where[0]))
