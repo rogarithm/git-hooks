@@ -8,10 +8,20 @@ class Installer
     wheres = []
     File.open(install_path_list, "r") do |f|
       f.each_line do |line|
-        wheres.push(line.split(',')[0].strip)
+        wheres.push(
+          [line.split(',')[0].strip, line.split(',')[1].strip]
+        )
       end
     end
     wheres
+  end
+
+  def store_only_first_items(infos)
+    result = []
+    infos.each do |info|
+      result.push(info[0])
+    end
+    result
   end
 
   def find_hook_location(trigger_point)

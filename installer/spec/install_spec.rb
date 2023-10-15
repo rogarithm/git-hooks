@@ -15,7 +15,9 @@ describe "Installer", "operations" do
     @installer.uninstall_hook(
       @installer.find_target_locations(
         @trigger_point,
-        @installer.prepare_paths_to_install('./spec/data/install_list')
+        @installer.store_only_first_items(
+          @installer.prepare_paths_to_install('./spec/data/install_list')
+        )
       )
     )
   end
@@ -23,7 +25,9 @@ describe "Installer", "operations" do
   it "훅을 설치할 저장소 경로와 발동 조건으로 훅 설치 위치를 계산할 수 있다" do
     @installer.find_target_locations(
       @trigger_point,
-      @installer.prepare_paths_to_install('./spec/data/install_list2')
+      @installer.store_only_first_items(
+        @installer.prepare_paths_to_install('./spec/data/install_list2')
+      )
     ).should == [File.expand_path(@install_full_dir)]
   end
   it "훅 발동 조건으로 훅 소스 위치를 계산할 수 있다" do
@@ -36,7 +40,9 @@ describe "Installer", "operations" do
       @trigger_point,
       @installer.find_target_locations(
         @trigger_point,
-        @installer.prepare_paths_to_install('./spec/data/install_list2')
+        @installer.store_only_first_items(
+          @installer.prepare_paths_to_install('./spec/data/install_list2')
+        )
       )
     )
     File.symlink?(@install_full_dir).should == true
@@ -45,7 +51,9 @@ describe "Installer", "operations" do
   it "훅을 설치할 여러 저장소 경로와 발동 조건으로 저장소별 훅 설치 위치를 계산할 수 있다" do
     @installer.find_target_locations(
       @trigger_point,
-      @installer.prepare_paths_to_install('./spec/data/install_list')
+      @installer.store_only_first_items(
+        @installer.prepare_paths_to_install('./spec/data/install_list')
+      )
     ).should == [File.expand_path(@install_full_dir), File.expand_path(@install_full_dir2)]
   end
   it "한 번에 두 곳에 훅을 설치할 수 있다" do
@@ -53,7 +61,9 @@ describe "Installer", "operations" do
       @trigger_point,
       @installer.find_target_locations(
         @trigger_point,
-        @installer.prepare_paths_to_install('./spec/data/install_list')
+        @installer.store_only_first_items(
+          @installer.prepare_paths_to_install('./spec/data/install_list')
+        )
       )
     )
     File.symlink?(@install_full_dir).should == true
@@ -61,6 +71,8 @@ describe "Installer", "operations" do
   end
 
   it "훅을 설치할 경로 정보를 파일에서 읽어올 수 있다" do
-    @installer.prepare_paths_to_install('./spec/data/install_list').should == [@install_root_dir, @install_root_dir2]
+    @installer.store_only_first_items(
+      @installer.prepare_paths_to_install('./spec/data/install_list')
+    ).should == [@install_root_dir, @install_root_dir2]
   end
 end
