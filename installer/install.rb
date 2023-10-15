@@ -8,7 +8,7 @@ class Installer
     wheres = []
     File.open(install_path_list, "r") do |f|
       f.each_line do |line|
-        wheres.push(line.gsub(/\n/, ''))
+        wheres.push(line.split(',')[0].strip)
       end
     end
     wheres
