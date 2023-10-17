@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+local_branch="main"
+remote_branch="origin/#{local_branch}"
+
+puts "updating remote branch..."
+`git fetch origin`
+
+puts "comparing if there's different commits between local and remote..."
+compare=`git log --pretty=oneline --abbrev-commit #{local_branch}..#{remote_branch}`
+
+if only_local_has_more
+  puts "no problem. push!"
+elsif only_remote_has_more
+  puts "remote has commits you didn't pulled. you should merge origin before push"
+  exit 1
+end
