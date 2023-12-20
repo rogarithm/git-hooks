@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+#TODO
+# upstream이 맞다면, push 중단시키기
+# 에러 메시지를 어떻게 내보내야할까?
+
+forbidden_to_push = "upstream"
+remote_name = ARGV[0]
+
+if (remote_name == forbidden_to_push)
+  puts "you cannot push to #{forbidden_to_push} remote branch!"
+  exit 1
+end

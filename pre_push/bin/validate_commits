@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+forbidden_to_push = "upstream"
+remote_name = ARGV[0]
+remote_location = ARGV[1]
+
+lines = []
+while line = STDIN.gets do
+  splitted = line.split(" ")
+  local_oid = splitted[1]
+  remote_oid = splitted[3]
+end
+
+range="remote_oid..local_oid"
+
+will_be_pushed = `git rev-list range`
