@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+remote_name = ARGV[0]
+remote_location = ARGV[1]
+
+if remote_name == 'upstream'
+  puts "you cannot push to upstream directly!"
+  puts "abort push..."
+  exit 1
+end
+
+`git fetch upstream`
+commits_only_upstream_has=`git log --pretty=oneline --abbrev-commit ..upstream/develop | wc -l | sed -e 's/^ *//'`.to_i
+if commits_only_upstream_has > 1
+  puts "there are commits only upstream have"
+  puts "you need to merge them before push!"
+  exit 1
+end
+
+puts "no problem. now push to origin..."
+exit 0
