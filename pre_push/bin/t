@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+remote_name = ARGV[0]
+remote_location = ARGV[1]
+
+current_branch=`git branch | grep -e '^*' | sed -e 's/^* *//'`
+branch='develop'
+forked_remote='origin'
+
+if current_branch == 'develop'
+  puts "please execute push command in feature branch!"
+  puts "abort push..."
+  exit 1
+end
+
+if remote_name == 'upstream'
+  puts "you cannot push to upstream directly!"
+  puts "abort push..."
+  exit 1
+end
+
+`git checkout develop`
+only_feature_has=`git log --pretty=oneline --abbrev-commit develop..#{current_branch} | wc -l | sed -e 's/^ *//'`
+
+if only_upstream_has > 1
+  puts "there's commits only feature branch have"
+  puts "try to merge..."
+  `git merge #{current_branch}`
+end
+
+`git fetch upstream`
+
+only_upstream_has=`git log --pretty=oneline --abbrev-commit ..upstream/#{branch} | wc -l | sed -e 's/^ *//'`
+
+if only_upstream_has > 1
+  puts "there's commits only upstream have"
+  puts "try to merge..."
+  `git merge upstream/#{branch}`
+end
+
+puts "now push to origin..."
+`git push origin #{branch}`
+exit 0
